@@ -10,7 +10,7 @@
 <body>
     {% for subject in subject_list%}
         <div>
-            <a href="{{subject.get_absolute_url}}">{{ subject.test_subject }}</a>
+            <a href="{ url 'test_view' }">{{ subject.title }}</a>
         </div>
     {% endfor %}
 </body>

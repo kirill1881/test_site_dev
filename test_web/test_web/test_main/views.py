@@ -14,8 +14,8 @@ def test_view(request):
     return HttpResponse('<h1>Страница с тестами</h1>')
 
 
-class HomeTest(ListView):
-    model = Test
+class SubjectView(ListView):
+    model = Subject
     template_name = 'test_main/index.html'
     context_object_name = 'subject_list'
 
@@ -26,9 +26,16 @@ class TestView(DetailView):
     context_object_name = 'test'
     slug_url_kwarg = 'test_slug'
 
+    def get_queryset(self):
+        test_slug = self.kwargs['test_slug']
+        return Test.objects.filter(slug=test_slug)
+
 
 class QuestionsView(ListView):
     model = Question
-    template_name = 'test_main/questions_view.html'
+    template_name = 'test_main/question_list.html'
     context_object_name = 'questions'
 
+    def get_queryset(self):
+        # question_id = self.kwargs['pk']
+        return Question.objects.all().select_related('test_title')

@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-    {{ questions.question_title }}
+    {% for question in questions %}
+        <div>
+            {{question.question_title}}
+            {{question.question_text}}
+            {{question.answer1}}
+            {{question.answer2}}
+            {{question.answer3}}
+            {{question.answer4}}
+        </div>
+    {% endfor %}
 </body>
 </html>

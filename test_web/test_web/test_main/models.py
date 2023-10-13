@@ -35,8 +35,8 @@ class Subject(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse('subject_view', kwargs={'subject_slug': self.slug})
+    # def get_absolute_url(self):
+    #     return reverse('subject_view', kwargs={'subject_slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
