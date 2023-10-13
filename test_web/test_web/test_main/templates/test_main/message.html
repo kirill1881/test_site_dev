@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,10 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-    {% for subject in subject_list%}
-        <div>
-            <a href="{% url 'test_view' subject_id=subject.id %}">{{ subject.title }}</a>
-        </div>
-    {% endfor %}
+    <h1>It works</h1>
 </body>
 </html>

@@ -9,7 +9,16 @@
 </head>
 <body>
 <!--    {{ test.test_subject }}-->
-    <a href="{% url 'questions_list' %}">{{ test.title }}</a>
+
+
+    {%for test in tests%}
+        <div>
+            <a href="{% url 'questions_list' test_id=test.id %}">{{ test.title }}</a>
+        </div>
+    {% endfor %}
+
+
+
 <!--    {{ test.test_type }}-->
 <!--    {{ test.question_title }}-->
 </body>
