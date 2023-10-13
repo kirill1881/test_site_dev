@@ -19,7 +19,7 @@ def submit_answer(request):
         for question in Question.objects.all():
             answer = request.POST.get(str(question.id))
             print(answer)
-    return render(request, 'message.html')
+    return render(request, 'test_main/submit_answer.html')
 
 
 class SubjectView(ListView):
