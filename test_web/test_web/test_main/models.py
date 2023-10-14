@@ -59,6 +59,10 @@ class Question(models.Model):
         ('2', answer2),
         ('3', answer3),
         ('4', answer4)
+        # (answer1, '1'),
+        # (answer2, '2'),
+        # (answer3, '3'),
+        # (answer4, '4')
     ]
     is_correct = models.CharField(max_length=150, choices=ANSWERS_CHOICE)
 

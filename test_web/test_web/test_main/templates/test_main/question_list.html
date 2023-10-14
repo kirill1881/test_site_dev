@@ -10,25 +10,45 @@
             <p>Название вопроса: {{question.question_title}}</p>
             <p>Текст вопроса: {{question.question_text}}</p>
             <div>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                {% endfor %}
+            {% endif %}
+            </div>
+            <div>
                 <form action="{% url 'submit_answer' %}" method="post">
                     {% csrf_token %}
-                    <label>
-                        <input type="checkbox">
-                        {{question.answer1}}
-                    </label>
-                    <label>
-                        <input type="checkbox">
-                        {{question.answer2}}
-                    </label>
-                    <label>
-                        <input type="checkbox">
-                        {{question.answer3}}
-                    </label>
-                    <label>
-                        <input type="checkbox">
-                        {{question.answer4}}
-                    </label>
-                    <input type="submit" value="Отправить">
+                    <div>
+                        <label>
+                            <input type="checkbox" name="is_correct" value="{{question.answer1}}">
+                            {{question.answer1}}
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_correct" value="{{question.answer2}}">
+                            {{question.answer2}}
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_correct" value="{{question.answer3}}">
+                            {{question.answer3}}
+                        </label>
+                        <label>
+                            <input type="checkbox" name="is_correct" value="{{question.answer4}}">
+                            {{question.answer4}}
+                        </label>
+                    </div>
+
+                    <div>
+                        <button type="submit">Отправить</button>
+                    </div>
                 </form>
 
 

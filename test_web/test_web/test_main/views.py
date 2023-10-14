@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
@@ -16,9 +17,21 @@ def test_view(request):
 
 def submit_answer(request):
     if request.method == 'POST':
-        for question in Question.objects.all():
-            answer = request.POST.get(str(question.id))
+        questions = Question.objects.all()
+        for question in questions:
+            # question_id = get_object_or_404(Question, id=question.id)
+            answer = request.POST.get('is_correct')
             print(answer)
+            print(question.is_correct)
+
+            if answer == question.is_correct:
+                # print('Well')
+                messages.success(request, 'Правильный ответ.')
+
+            else:
+                print('Nope')
+                messages.error(request, 'Ошибочный ответ')
+                return redirect('questions_list', test_id=question.test_title_id)
     return render(request, 'test_main/submit_answer.html')
 
 
