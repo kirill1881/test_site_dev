@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'test_web.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'web_test',
-        'USER': 'root',
-        'PASSWORD': 'firefox102528',
+        'USER': 'ddmtriev',
+        'PASSWORD': '**2003**',
         'HOST': 'localhost',
     }
 }
@@ -134,3 +134,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'test_web/static'),
 ]
+
+
+AUTH_USER_MODEL = 'test_main.CustomUser'

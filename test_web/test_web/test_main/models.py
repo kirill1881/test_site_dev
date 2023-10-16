@@ -2,6 +2,20 @@ from unidecode import unidecode
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.contrib.auth.models import AbstractUser
+
+
+class CustomUser(AbstractUser):
+    e_mail = models.EmailField(max_length=150)
+    oblast = models.CharField(max_length=300)
+    city = models.CharField(max_length=200)
+    GENDER_CHOICE = [
+        ('M', 'Мужчина'),
+        ('F', 'Женщина')
+    ]
+    gender = models.CharField(choices=GENDER_CHOICE)
+    age = models.IntegerField()
+    organization = models.CharField(null=True)
 
 
 class Test(models.Model):
