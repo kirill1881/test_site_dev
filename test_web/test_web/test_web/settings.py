@@ -81,6 +81,7 @@ DATABASES = {
         'USER': 'ddmtriev',
         'PASSWORD': '**2003**',
         'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -136,4 +137,4 @@ STATICFILES_DIRS = [
 ]
 
 
-AUTH_USER_MODEL = 'test_main.CustomUser'
+# AUTH_USER_MODEL = 'test_main.CustomUser'

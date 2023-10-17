@@ -52,7 +52,7 @@ def user_form(request):
             # oblast = form.cleaned_data['oblast']
             # city = form.cleaned_data['city']
 
-            form.save()
+            # form.save()
 
             # workbook = openpyxl.Workbook()
             # worksheet = workbook.active
@@ -63,8 +63,8 @@ def user_form(request):
             # response['Content-Disposition'] = 'attachment; filename="users.xlsx"'
             # workbook.save(response)
             # return response
-
-            return redirect('home')
+            # form.save()
+            return redirect('subject_view')
     else:
         form = UserForm()
     return render(request, 'test_main/user_form.html', {'form': form})

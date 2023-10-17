@@ -5,7 +5,7 @@ from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
 
 
-class CustomUser(AbstractUser):
+class CustomUser(models.Model):
     e_mail = models.EmailField(max_length=150)
     oblast = models.CharField(max_length=300)
     city = models.CharField(max_length=200)
@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
     ]
     gender = models.CharField(choices=GENDER_CHOICE)
     age = models.IntegerField()
-    organization = models.CharField(null=True)
+    organization = models.CharField(blank=True)
 
 
 class Test(models.Model):

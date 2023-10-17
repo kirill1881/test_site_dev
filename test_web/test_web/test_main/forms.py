@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class UserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ('organization', 'email', 'age', 'gender', 'oblast', 'city')
+        fields = ('organization', 'e_mail', 'age', 'gender', 'oblast', 'city')
 
         # organization = forms.CharField(empty_value='Организация не указана')
         # e_mail = forms.EmailField(max_length=150)
