@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(models.Model):
-    e_mail = models.EmailField(max_length=150)
+    email = models.EmailField(max_length=150)
     oblast = models.CharField(max_length=300)
     city = models.CharField(max_length=200)
     GENDER_CHOICE = [

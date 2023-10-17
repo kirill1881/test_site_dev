@@ -42,17 +42,17 @@ def submit_answer(request):
 def user_form(request):
 
     if request.method == 'POST':
-        user = User
-        form = UserForm(request.POST)
+        # user = User
+        form = UserForm(request.GET)
         if form.is_valid():
-            # organization = form.cleaned_data['organization']
-            # email = form.cleaned_data['e_mail']
-            # gender = form.cleaned_data['gender']
-            # age = form.cleaned_data['age']
-            # oblast = form.cleaned_data['oblast']
-            # city = form.cleaned_data['city']
+            organization = form.cleaned_data['organization']
+            email = form.cleaned_data['e_mail']
+            gender = form.cleaned_data['gender']
+            age = form.cleaned_data['age']
+            oblast = form.cleaned_data['oblast']
+            city = form.cleaned_data['city']
 
-            # form.save()
+            form.save()
 
             # workbook = openpyxl.Workbook()
             # worksheet = workbook.active
@@ -66,7 +66,7 @@ def user_form(request):
             # form.save()
             return redirect('subject_view')
     else:
-        form = UserForm()
+        form = UserForm(request)
     return render(request, 'test_main/user_form.html', {'form': form})
 
 
