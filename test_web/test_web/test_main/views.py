@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .forms import UserForm
-from django.contrib.auth.models import User
 import openpyxl
 
 
@@ -19,21 +18,60 @@ def test_view(request):
     return HttpResponse('<h1>Страница с тестами</h1>')
 
 
+# def submit_answer(self, request):
+#     if request.method == 'POST':
+#         user = User.objects.get(id=self.kwargs['user_id'])
+#         question = Question.objects.get(id=self.kwargs['question_id'])
+#         # questions = Question.objects.all()
+#         for question in questions:
+#             answer = request.POST.get('is_correct')
+#             print(answer)
+#             print(question.is_correct)
+#
+#             if answer == question.is_correct:
+#                 messages.success(request, 'Правильный ответ.')
+#
+#             else:
+#                 print('Nope')
+#                 messages.error(request, 'Ошибочный ответ.')
+#                 return redirect('questions_list', test_id=question.test_title_id)
+#     return render(request, 'test_main/submit_answer.html')
+
+
+# def answer_save(request):
+#     if request.method == 'POST':
+#         test_id = Test.objects.get(id='test_id')
+#         print(test_id)
+#         # user = User.objects.get(id=self.kwargs['user_id'])
+#         # questions = Question.objects.all()
+#         # for question in questions:
+#         #     print(question)
+#         # question = questions.filter(id=self.kwargs['question_id'])
+#         # answer = Answer(user=user, question=question, selected_answer=request.POST)
+#         # print(Answer.selected_answer)
+#         # print(question.is_correct)
+#         # answer.save()
+#     return render(request, 'test_main/submit_answer.html')
+
+
+# def submit_answer(request):
+#     question = get_object_or_404(Question, pk=self.kwargs['question_id'])
+#     selected_answer = request.POST.get('selected_answer')
+#     print(question)
+#     return render(request, 'test_main/submit_answer.html')
+
+
 def submit_answer(request):
     if request.method == 'POST':
-        questions = Question.objects.all()
-        for question in questions:
-            answer = request.POST.get('is_correct')
-            print(answer)
-            print(question.is_correct)
-
-            if answer == question.is_correct:
-                messages.success(request, 'Правильный ответ.')
-
-            else:
-                print('Nope')
-                messages.error(request, 'Ошибочный ответ.')
-                return redirect('questions_list', test_id=question.test_title_id)
+        # pass
+        # question_id = request.POST.get('is_correct')
+        for question in Question.objects.all():
+            question_id = question.id
+            print(question_id)
+            return redirect('submit_answer')
+            # print(question_id == question.is_correct)
+        # selected_answer = request.POST['selected_answer']
+        # print(selected_answer)
     return render(request, 'test_main/submit_answer.html')
 
 
@@ -67,7 +105,7 @@ class TestView(ListView):
 
 class QuestionsView(ListView):
     model = Question
-    template_name = 'test_main/question_list.html'
+    template_name = 'test_main/question_list1.html'
     context_object_name = 'questions'
 
     def get_queryset(self):
