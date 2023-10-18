@@ -5,14 +5,14 @@ from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
 
 
-class CustomUser(models.Model):
-    email = models.EmailField(max_length=150)
+class User(models.Model):
+    user_email = models.EmailField(max_length=150)
     oblast = models.CharField(max_length=300)
     city = models.CharField(max_length=200)
     GENDER_CHOICE = [
-        ('M', 'Мужчина'),
-        ('F', 'Женщина')
-    ]
+            ('M', 'Мужчина'),
+            ('F', 'Женщина')
+        ]
     gender = models.CharField(choices=GENDER_CHOICE)
     age = models.IntegerField()
     organization = models.CharField(blank=True)
@@ -61,7 +61,7 @@ class Subject(models.Model):
 
 
 class Question(models.Model):
-    test_title = models.ForeignKey('Test', on_delete=models.PROTECT, null=True)
+    test_title = models.ForeignKey('Test', on_delete=models.CASCADE, null=True)
     question_title = models.CharField(max_length=200)
     question_text = models.CharField(max_length=300)
     answer1 = models.CharField(max_length=150)
@@ -73,12 +73,14 @@ class Question(models.Model):
         ('2', answer2),
         ('3', answer3),
         ('4', answer4)
-        # (answer1, '1'),
-        # (answer2, '2'),
-        # (answer3, '3'),
-        # (answer4, '4')
     ]
     is_correct = models.CharField(max_length=150, choices=ANSWERS_CHOICE)
 
     def __str__(self):
         return self.question_title
+
+
+class Answer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    selected_answer = models.CharField(max_length=150)

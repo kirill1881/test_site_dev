@@ -23,13 +23,11 @@ def submit_answer(request):
     if request.method == 'POST':
         questions = Question.objects.all()
         for question in questions:
-            # question_id = get_object_or_404(Question, id=question.id)
             answer = request.POST.get('is_correct')
             print(answer)
             print(question.is_correct)
 
             if answer == question.is_correct:
-                # print('Well')
                 messages.success(request, 'Правильный ответ.')
 
             else:
@@ -40,33 +38,13 @@ def submit_answer(request):
 
 
 def user_form(request):
-
     if request.method == 'POST':
-        # user = User
-        form = UserForm(request.GET)
+        form = UserForm(request.POST)
         if form.is_valid():
-            organization = form.cleaned_data['organization']
-            email = form.cleaned_data['e_mail']
-            gender = form.cleaned_data['gender']
-            age = form.cleaned_data['age']
-            oblast = form.cleaned_data['oblast']
-            city = form.cleaned_data['city']
-
             form.save()
-
-            # workbook = openpyxl.Workbook()
-            # worksheet = workbook.active
-            # worksheet.append(['Организация', 'Email', 'Пол', 'Возраст', 'Область', 'Город'])
-            # worksheet.append([organization, email, gender, age, oblast, city])
-            #
-            # response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-            # response['Content-Disposition'] = 'attachment; filename="users.xlsx"'
-            # workbook.save(response)
-            # return response
-            # form.save()
             return redirect('subject_view')
     else:
-        form = UserForm(request)
+        form = UserForm()
     return render(request, 'test_main/user_form.html', {'form': form})
 
 

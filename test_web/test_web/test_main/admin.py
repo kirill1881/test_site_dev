@@ -13,4 +13,4 @@ class SubjectAdmin(admin.ModelAdmin):
 admin.site.register(Test, TestAdmin)
 admin.site.register(Question)
 admin.site.register(Subject, SubjectAdmin)
-admin.site.register(CustomUser)
+admin.site.register(User)
