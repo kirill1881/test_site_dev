@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+      <meta charset="UTF-8">
+
+  <title>Тест на правильную последовательность</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.css">
+  <style>
+    #question-container {
+      text-align: center;
+      width: 400px;
+      margin: 0 auto;
+    }
+    .answer-container {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Тест на правильную последовательность</h1>
+  <div id="question-container">
+    <p>Расположите месяцы года в правильной последовательности:</p>
+    <ul id="answers" class="answer-container">
+      <li>Январь</li>
+      <li>Март</li>
+      <li>Май</li>
+    </ul>
+    <button id="submit-button">Проверить</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+  <script>
+    const answersContainer = document.getElementById("answers");
+    const submitButton = document.getElementById("submit-button");
+
+    // Создаем экземпляр Sortable.js для управления списком
+    const sortable = new Sortable(answersContainer, {
+      animation: 150,
+      onEnd: function (evt) {
+        checkAnswer();
+      }
+    });
+
+    // Правильная последовательность
+    const correctSequence = ["Январь", "Март", "Май"];
+
+    // Функция для проверки ответа
+    function checkAnswer() {
+      const userSequence = [...answersContainer.children].map(li => li.textContent);
+      if (JSON.stringify(userSequence) === JSON.stringify(correctSequence)) {
+        alert("Правильно! Последовательность верна.");
+      } else {
+        alert("Неправильно. Пожалуйста, пересмотрите свой ответ.");
+      }
+    }
+
+    submitButton.addEventListener("click", () => {
+      checkAnswer();
+    });
+  </script>
+</body>
+</html>
