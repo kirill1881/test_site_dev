@@ -2,12 +2,11 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from .forms import UserForm
+from django.views.generic import ListView, DetailView, FormView
+from .forms import *
 import openpyxl
-
-
 from .models import *
+import json
 
 
 def index(request):
@@ -62,16 +61,15 @@ def test_view(request):
 
 
 def submit_answer(request):
-    if request.method == 'POST':
-        # pass
-        # question_id = request.POST.get('is_correct')
-        for question in Question.objects.all():
-            question_id = question.id
-            print(question_id)
-            return redirect('submit_answer')
-            # print(question_id == question.is_correct)
-        # selected_answer = request.POST['selected_answer']
-        # print(selected_answer)
+#     if request.method == 'POST':
+#         pk = self.kwargs.get('pk')
+#         user_answer = request.POST.get('is_correct')
+#         question = get_object_or_404(Question, pk=pk)
+#         print(user_answer)
+#         # question = Question.objects.get(pk=json.loads(request.body))
+#         print(question)
+#         # question.user_answer = user_answer
+#         # question.save()
     return render(request, 'test_main/submit_answer.html')
 
 
@@ -101,6 +99,44 @@ class TestView(ListView):
     def get_queryset(self):
         subject = get_object_or_404(Subject, id=self.kwargs['subject_id'])
         return Test.objects.filter(test_subject=subject)
+
+
+class QuestionView(DetailView):
+    model = Question
+    template_name = 'test_main/question_view.html'
+    context_object_name = 'question'
+    http_method_names = ['get', 'post']
+
+    # def post(self, request, *args, **kwargs):
+    #     question = self.get_object()
+    #     user_answer = request.POST.get('user_answer')
+    #     question.user_answer = user_answer
+    #     question.save()
+    #     return render(request, 'test_main/submit_answer.html')
+
+    def submit_answer(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            pk = self.kwargs.get('pk')
+            user_answer = request.POST.get('is_correct')
+            question = get_object_or_404(Question, pk=pk)
+            print(user_answer)
+            question.user_answer = user_answer
+            question.save()
+            # question = Question.objects.get(pk=json.loads(request.body))
+            print(question)
+            # question.user_answer = user_answer
+            # question.save()
+        return render(request, 'test_main/submit_answer.html')
+
+
+# class QuestionView(FormView):
+#     form_class = QuestionForm
+#     template_name = 'test_main/question_form.html'
+#     # context_object_name = 'question'
+#     # http_method_names = ['get', 'post']
+#     success_url = 'test_main/question_form.html'
+
+    # def post(self, request, *args, **kwargs):
 
 
 class QuestionsView(ListView):

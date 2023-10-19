@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% else %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <p>Название вопроса: {{question.question_title}}</p>
+    <p>Текст вопроса: {{question.question_text}}</p>
+
+    <div>
+        <form action="{% url 'question_view' pk=question.id+1 %}" method="post">
+            {% csrf_token %}
+            <div>
+                <label>
+                    <input type="checkbox" name="is_correct" value="{{question.answer1}}">
+                    {{question.answer1}}
+                </label>
+                <label>
+                    <input type="checkbox" name="is_correct" value="{{question.answer2}}">
+                    {{question.answer2}}
+                </label>
+                <label>
+                    <input type="checkbox" name="is_correct" value="{{question.answer3}}">
+                    {{question.answer3}}
+                </label>
+                <label>
+                    <input type="checkbox" name="is_correct" value="{{question.answer4}}">
+                    {{question.answer4}}
+                </label>
+            </div>
+
+            <div>
+                <button type="submit">Отправить</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

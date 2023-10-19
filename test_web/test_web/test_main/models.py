@@ -75,6 +75,7 @@ class Question(models.Model):
         ('4', answer4)
     ]
     is_correct = models.CharField(max_length=150, choices=ANSWERS_CHOICE)
+    user_answer = models.CharField(max_length=150, choices=ANSWERS_CHOICE, blank=True)
 
     def __str__(self):
         return self.question_title

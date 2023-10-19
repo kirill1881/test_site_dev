@@ -24,29 +24,12 @@
                             {{ message }}
                         </div>
                     {% endif %}
-            {% endfor %}
-        {% endif %}
+                {% endfor %}
+            {% endif %}
         </div>
         <div>
             <form action="{% url 'submit_answer' %}" method="post">
                 {% csrf_token %}
-<!--                <label>-->
-<!--                    <input type="checkbox">-->
-<!--                    {{question.answer1}}-->
-<!--                </label>-->
-<!--                <label>-->
-<!--                    <input type="checkbox">-->
-<!--                    {{question.answer2}}-->
-<!--                </label>-->
-<!--                <label>-->
-<!--                    <input type="checkbox">-->
-<!--                    {{question.answer3}}-->
-<!--                </label>-->
-<!--                <label>-->
-<!--                    <input type="checkbox">-->
-<!--                    {{question.answer4}}-->
-<!--                </label>-->
-<!--                <input type="submit" value="Отправить">-->
                 <div>
                     <label>
                         <input type="checkbox" name="is_correct" value="{{question.answer1}}">
