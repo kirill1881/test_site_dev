@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zg=^^@u^yh_a=ai%zlv1t7x9slw@gbg@1)&)nqx##ab2lvjxk2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app',]
 
 
 # Application definition
@@ -76,12 +76,8 @@ WSGI_APPLICATION = 'test_web.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'web_test',
-        'USER': 'ddmtriev',
-        'PASSWORD': '**2003**',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
